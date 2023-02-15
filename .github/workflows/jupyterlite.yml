@@ -46,16 +46,14 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
           cache-dependency-path: |
-            xdsl/requirements.txt
-            xdsl/requirements-optional.txt
-            xdsl/setup.py
             xdsl/.github/workflows/jupyterlite.yml
             pyodide/requirements.txt
 
 
       - name: Install dependencies
         run: |
-          python -m pip install jupyterlite[all]==0.1.0b17 libarchive-c build pyodide-build
+          python -m pip install -U jupyterlite[all]==0.1.0b17 libarchive-c build pyodide-build -r pyodide/requirements.txt
+          sudo apt update && sudo apt install f2c
           
       - name: Build xDSL source distribution
         run: |
@@ -67,8 +65,6 @@ jobs:
         run: |
           
           cd pyodide
-          python -m pip install -U -r requirements.txt
-          sudo apt update && sudo apt install f2c
           
           pyodide skeleton pypi --update xdsl || pyodide skeleton pypi xdsl
           
