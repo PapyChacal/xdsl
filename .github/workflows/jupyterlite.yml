@@ -71,7 +71,7 @@ jobs:
           mkdir pyodide/pyodide
           mv pyodide/dist pyodide/pyodide/pyodide
 
-          python -m jupyter lite build --contents content --pyodide pyodide/pyodide
+          python -m jupyter lite build --contents content --pyodide pyodide/pyodide --base-url="https://lab.xdsl.dev/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
